@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+#Dev C++ Win binaries
+CRG.dev
+*.win
