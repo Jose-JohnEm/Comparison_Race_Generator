@@ -1,13 +1,7 @@
-/*
-    Jonathan Emmanuel Jose
-    Comparison Race Generator
-*/
 
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+#include "crg.hpp"
 
-
-int main(int ac, char **av)
+int on_window()
 {
     sf::Window window;
 
@@ -20,5 +14,4 @@ int main(int ac, char **av)
                 window.close();
         }
     }
-    return 0;
 }

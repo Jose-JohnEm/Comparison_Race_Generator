@@ -6,21 +6,20 @@
 ##
 
 
-MAIN	=	main.cpp 					\
-
-CFLAGS	=	-I./include/
+SRC		=	src/main.cpp 					\
+			src/parsor.cpp					\
+			src/my_error.cpp				\
 
 SFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system -lm
 
-OBJ		= 	$(MAIN:.cpp=.o)				\
-
 NAME	=	CRG
 
-all:	$(OBJ)
-	g++ -o $(NAME) $(OBJ) $(CFLAGS) $(SFLAGS)
+CFLAGS	=	-I ./include/
+
+all:
+	g++ $(CFLAGS) -o $(NAME) $(SRC) $(SFLAGS)
 
 clean:
-	rm -f $(OBJ)
 	echo CLEAN
 
 fclean: clean
