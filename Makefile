@@ -15,7 +15,7 @@ SFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system -lm
 
 NAME	=	CRG
 
-CFLAGS	=	-I ./include/
+CFLAGS	=	-I ./include/ -g3
 
 all:
 	g++ $(CFLAGS) -o $(NAME) $(SRC) $(SFLAGS)

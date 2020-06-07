@@ -1,4 +1,5 @@
 
+#include <algorithm> 
 #include "crg.hpp"
 
 #define ext_not_supported file.rfind(".tsv") == -1 && file.rfind(".csv") == -1
@@ -7,21 +8,35 @@
 
 using namespace std;
 
+bool regular_cells_checker(char sep)
+{
+
+}
+
 int data_checker(char *buff, string file)
 {
     string data = buff;
     cout << "The file exists !\n";
-    char sep;
+    char sep{','};
     auto lines{0};
     int *nb_sep;
+    char *pch;
+    string pch_s;
 
-    if (lines = data.find_last_of('\n') < 2)
+    if ((lines = count(data.begin(), data.end(), '\n')) < 3)
         my_error("Sorry but file format is not correct\n");
-    
     nb_sep = new int [lines];
     if (tsv_file) sep = '\t';
     else if (csv_file) sep = ',';
     
+    pch = strtok(buff, "\n");
+     cout << sep << "\n";
+    for (int i{0}; pch != NULL; i++) {
+        pch_s = pch;
+        nb_sep[i] = count(pch_s.begin(), pch_s.end(), sep);
+        cout << nb_sep[i] << "\n";
+        pch = strtok(NULL, "\n");
+    }
     cout << "It seems correct\n";
 }
 
