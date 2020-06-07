@@ -34,3 +34,5 @@
 #Dev C++ Win binaries
 CRG.dev
 *.win
+.vscode
+CRG

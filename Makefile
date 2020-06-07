@@ -9,6 +9,7 @@
 SRC		=	src/main.cpp 					\
 			src/parsor.cpp					\
 			src/my_error.cpp				\
+			src/mylib.cpp					\
 
 SFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system -lm
 

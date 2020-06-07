@@ -16,6 +16,13 @@
 
 #endif
 
+#ifndef MY_LIB
+#define MY_LIB
+
+#include "my_lib.hpp"
+
+#endif
+
 #ifndef CRG
 #define CRG
 
