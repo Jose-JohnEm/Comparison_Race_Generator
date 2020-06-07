@@ -9,7 +9,8 @@
 SRC		=	src/main.cpp 					\
 			src/parsor.cpp					\
 			src/my_error.cpp				\
-			src/mylib.cpp					\
+
+CLASS	=	src/classes/company.cpp			\
 
 SFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system -lm
 
@@ -18,7 +19,7 @@ NAME	=	CRG
 CFLAGS	=	-I ./include/ -g3
 
 all:
-	g++ $(CFLAGS) -o $(NAME) $(SRC) $(SFLAGS)
+	g++ $(CFLAGS) -o $(NAME) $(SRC) $(CLASS) $(SFLAGS)
 
 clean:
 	echo CLEAN

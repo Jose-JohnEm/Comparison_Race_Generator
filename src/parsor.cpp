@@ -8,20 +8,21 @@
 
 using namespace std;
 
-bool regular_cells_checker(char sep)
+string **order_infos(char *buff, int lines, int place)
 {
+    string data = buff;
 
 }
 
-int data_checker(char *buff, string file)
+string **data_checker(char *buff, string file)
 {
     string data = buff;
-    cout << "The file exists !\n";
     char separator;
-    auto lines{0};
+    int lines{0};
     int *nb_sep;
     char *pch;
     string pch_s;
+    company ab;
 
     if ((lines = count(data.begin(), data.end(), '\n')) < 3)
         my_error("Sorry but file format is not correct\n");
@@ -39,8 +40,8 @@ int data_checker(char *buff, string file)
     for (int i{1}; i <= lines; i++)
         if (nb_sep[i] != nb_sep[i - 1])
             my_error("Cells on your file are not regular\n");
-    
-    cout << "It seems correct\n";
+
+    //return order_infos(buff, lines, nb_sep[0]);
 }
 
 void parsor(char *av)

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <memory>
 #include <cstdio>
 #include <cstring>
 
@@ -22,6 +23,7 @@
 #define MY_LIB
 
 #include "my_lib.hpp"
+#include "crg/company.hpp"
 
 #endif
 
