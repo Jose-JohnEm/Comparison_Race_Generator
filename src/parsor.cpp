@@ -3,8 +3,8 @@
 #include "crg.hpp"
 
 #define ext_not_supported file.rfind(".tsv") == -1 && file.rfind(".csv") == -1
-#define tsv_file file.rfind(".tsv")
-#define csv_file file.rfind(".csv")
+#define tsv_file file.rfind(".tsv") != -1
+#define csv_file file.rfind(".csv") != -1
 
 using namespace std;
 
@@ -17,7 +17,7 @@ int data_checker(char *buff, string file)
 {
     string data = buff;
     cout << "The file exists !\n";
-    char sep{','};
+    char separator;
     auto lines{0};
     int *nb_sep;
     char *pch;
@@ -26,17 +26,20 @@ int data_checker(char *buff, string file)
     if ((lines = count(data.begin(), data.end(), '\n')) < 3)
         my_error("Sorry but file format is not correct\n");
     nb_sep = new int [lines];
-    if (tsv_file) sep = '\t';
-    else if (csv_file) sep = ',';
-    
+    if (tsv_file) separator = '\t';
+    else if (csv_file) separator = ',';
+
     pch = strtok(buff, "\n");
-     cout << sep << "\n";
     for (int i{0}; pch != NULL; i++) {
         pch_s = pch;
-        nb_sep[i] = count(pch_s.begin(), pch_s.end(), sep);
-        cout << nb_sep[i] << "\n";
+        nb_sep[i] = count(pch_s.begin(), pch_s.end(), separator);
         pch = strtok(NULL, "\n");
     }
+
+    for (int i{1}; i <= lines; i++)
+        if (nb_sep[i] != nb_sep[i - 1])
+            my_error("Cells on your file are not regular\n");
+    
     cout << "It seems correct\n";
 }
 
