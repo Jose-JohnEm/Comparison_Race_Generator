@@ -8,21 +8,49 @@
 
 using namespace std;
 
-string **order_infos(char *buff, int lines, int place)
+company data_order(char *line, int cells)
 {
-    string data = buff;
+    company new_comp;
+    char *pch{nullptr};
+    string pch_s;
+    vector<string> Data;
 
+    pch = strtok(line, ",\t");
+    for (int i = 0; pch != nullptr; i++) {
+        Data.push_back(pch);
+        cout << pch;
+        strtok(nullptr, ",\t");
+    }
+
+    new_comp.setName(Data[0]);
+    Data.erase(Data.begin());
+    new_comp.setValues(Data);
+    return new_comp;
 }
 
-string **data_checker(char *buff, string file)
+vector<company> data_pusher(char *buff, int cells)
 {
-    string data = buff;
+    string data{buff};
+    char *pch{nullptr};
+    string pch_s;
+    vector<company> Comps;
+
+    pch = strtok(buff, "\n");
+    for (int i{0}; pch != nullptr; i++) {
+        if (i == 0) continue;
+        Comps.push_back(data_order(pch, cells));
+        strtok(nullptr, "\n");
+    }
+}
+
+int data_checker(char *buff, string file)
+{
+    string data{buff};
     char separator;
     int lines{0};
-    int *nb_sep;
-    char *pch;
+    int *nb_sep{nullptr};
+    char *pch{nullptr};
     string pch_s;
-    company ab;
 
     if ((lines = count(data.begin(), data.end(), '\n')) < 3)
         my_error("Sorry but file format is not correct\n");
@@ -31,25 +59,26 @@ string **data_checker(char *buff, string file)
     else if (csv_file) separator = ',';
 
     pch = strtok(buff, "\n");
-    for (int i{0}; pch != NULL; i++) {
+    for (int i{0}; pch != nullptr; i++) {
         pch_s = pch;
         nb_sep[i] = count(pch_s.begin(), pch_s.end(), separator);
-        pch = strtok(NULL, "\n");
+        pch = strtok(nullptr, "\n");
     }
 
     for (int i{1}; i <= lines; i++)
         if (nb_sep[i] != nb_sep[i - 1])
             my_error("Cells on your file are not regular\n");
-
-    //return order_infos(buff, lines, nb_sep[0]);
+    cout << "Format is correct\n";
+    return nb_sep[0];
 }
 
 void parsor(char *av)
 {
     string file = av;
     streampos size;
-    char *buffer;
+    char *buffer{nullptr};
     ifstream data;
+    int cells{0};
 
     if (ext_not_supported)
         my_error("No supported file\nI only accept .tsv and .csv files\n");
@@ -64,5 +93,6 @@ void parsor(char *av)
     buffer = new char [size];
     data.read(buffer, size);
     data.close();
-    data_checker(buffer, file);
+    cells = data_checker(buffer, file);
+    data_pusher(buffer, cells);
 }
