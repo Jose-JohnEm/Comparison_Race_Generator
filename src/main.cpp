@@ -11,5 +11,5 @@ int main(int ac, char **av)
     else if (ac > 2) std::cout << "Too many arguments\n";
     else parsor(av[1]);
 
-    return 0; 
+    return 0;
 }

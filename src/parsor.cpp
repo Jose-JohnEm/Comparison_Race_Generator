@@ -19,7 +19,7 @@ company data_order(char *line, int cells)
     for (int i = 0; pch != nullptr; i++) {
         Data.push_back(pch);
         cout << pch;
-        strtok(nullptr, ",\t");
+        pch = strtok(nullptr, ",\t");
     }
 
     new_comp.setName(Data[0]);
@@ -30,21 +30,20 @@ company data_order(char *line, int cells)
 
 vector<company> data_pusher(char *buff, int cells)
 {
-    string data{buff};
     char *pch{nullptr};
-    string pch_s;
     vector<company> Comps;
 
     pch = strtok(buff, "\n");
     for (int i{0}; pch != nullptr; i++) {
-        if (i == 0) continue;
-        Comps.push_back(data_order(pch, cells));
-        strtok(nullptr, "\n");
+        if (i != 0)
+            Comps.push_back(data_order(strdup(pch), cells));
+        pch = strtok(nullptr, "\n");
     }
 }
 
-int data_checker(char *buff, string file)
+int data_checker(char *buff_cp, string file)
 {
+    char *buff = strdup(buff_cp);
     string data{buff};
     char separator;
     int lines{0};

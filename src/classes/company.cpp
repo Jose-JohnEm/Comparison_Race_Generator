@@ -14,7 +14,7 @@ void company::setValues(std::vector<std::string> data)
 {
     char *tmp{nullptr};
 
-    for (int i{0}; i < data.max_size(); i++) {
+    for (int i{0}; i < data.size() - 1; i++) {
         tmp = new char[data[i].length() + 1];
         strcpy(tmp, data[i].c_str());
         cValues.push_back(atoi(tmp));
