@@ -1,11 +1,14 @@
 
 #include "crg.hpp"
 
-int on_window()
+void window_loop()
 {
-    sf::Window window;
+    
+}
 
-    window.create(sf::VideoMode(800, 600, 32), "Comparison Race Generator");
+void on_window()
+{
+    sf::RenderWindow window(sf::VideoMode(1200, 800), "Comparison Race Generator", sf::Style::Close);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -18,5 +21,5 @@ int on_window()
 
 void displayer(HUD hud)
 {
-    
+    on_window();
 }

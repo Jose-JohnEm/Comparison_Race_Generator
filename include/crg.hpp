@@ -16,6 +16,9 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Config.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
 
 #endif
 
