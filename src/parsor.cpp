@@ -15,11 +15,10 @@ company data_order(char *line, int cells)
     string pch_s;
     vector<string> Data;
 
-    pch = strtok(line, ",\t");
+    pch = strtok(line, ",\t\r");
     for (int i = 0; pch != nullptr; i++) {
         Data.push_back(pch);
-        cout << pch;
-        pch = strtok(nullptr, ",\t");
+        pch = strtok(nullptr, ",\t\r");
     }
 
     new_comp.setName(Data[0]);
@@ -28,17 +27,27 @@ company data_order(char *line, int cells)
     return new_comp;
 }
 
-vector<company> data_pusher(char *buff, int cells)
+vector<company> data_pusher(char *buff_cp, int cells)
 {
+    char *buff = strdup(buff_cp);
     char *pch{nullptr};
     vector<company> Comps;
+    string cuter{buff};
+    vector<char*> Data;
+    int lines{0};
 
+    cuter.erase(remove(cuter.begin(), cuter.end(), '\r'), cuter.end());
+    buff = strdup(cuter.c_str());
     pch = strtok(buff, "\n");
-    for (int i{0}; pch != nullptr; i++) {
-        if (i != 0)
-            Comps.push_back(data_order(strdup(pch), cells));
+    for (; pch != nullptr; lines++) {
+        Data.push_back(pch);
         pch = strtok(nullptr, "\n");
     }
+    for (int i{1}; i < lines; i++) {
+        Comps.push_back(data_order(Data[i], cells));
+    }
+    cout << "Its null now\n";
+    return Comps;
 }
 
 int data_checker(char *buff_cp, string file)
@@ -78,6 +87,7 @@ void parsor(char *av)
     char *buffer{nullptr};
     ifstream data;
     int cells{0};
+    Companies Comps;
 
     if (ext_not_supported)
         my_error("No supported file\nI only accept .tsv and .csv files\n");
@@ -93,5 +103,6 @@ void parsor(char *av)
     data.read(buffer, size);
     data.close();
     cells = data_checker(buffer, file);
-    data_pusher(buffer, cells);
+    Comps = data_pusher(buffer, cells);
+    
 }

@@ -4,6 +4,7 @@
 
 #include <string>
 
+#define Companies std::vector<company>
 class company
 {
     public:
