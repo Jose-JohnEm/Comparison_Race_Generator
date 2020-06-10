@@ -15,3 +15,8 @@ int on_window()
         }
     }
 }
+
+void displayer(HUD hud)
+{
+    
+}

@@ -8,6 +8,31 @@
 
 using namespace std;
 
+specs specifications_pusher(char *buff_cp)
+{
+    char *buff = my_strdup(buff_cp);
+    specs new_spec;
+    char *pch{nullptr};
+    string cuter;
+    vector<string> pre_sp;
+
+    pch = strtok(buff, "\n");
+    cuter = pch;
+    cuter.erase(remove(cuter.begin(), cuter.end(), '\r'), cuter.end());
+    pch = strdup(cuter.c_str());
+
+    pch = strtok(pch, ",\t");
+    while (pch != nullptr) {
+        pre_sp.push_back(pch);
+        pch = strtok(nullptr, ",\t");
+    }
+    
+    new_spec.setUnit(pre_sp[0]);
+    pre_sp.erase(pre_sp.begin());
+    new_spec.setTimes(pre_sp);
+    return new_spec;
+}
+
 company data_order(char *line, int cells)
 {
     company new_comp;
@@ -17,6 +42,8 @@ company data_order(char *line, int cells)
 
     pch = strtok(line, ",\t\r");
     for (int i = 0; pch != nullptr; i++) {
+        if (i > 0 && isanum(pch) == false)
+            my_error("Make sure that cells only contains numbers\n");
         Data.push_back(pch);
         pch = strtok(nullptr, ",\t\r");
     }
@@ -46,7 +73,6 @@ vector<company> data_pusher(char *buff_cp, int cells)
     for (int i{1}; i < lines; i++) {
         Comps.push_back(data_order(Data[i], cells));
     }
-    cout << "Its null now\n";
     return Comps;
 }
 
@@ -80,7 +106,7 @@ int data_checker(char *buff_cp, string file)
     return nb_sep[0];
 }
 
-void parsor(char *av)
+HUD parsor(char *av)
 {
     string file = av;
     streampos size;
@@ -88,6 +114,8 @@ void parsor(char *av)
     ifstream data;
     int cells{0};
     Companies Comps;
+    specs s_sp;
+    HUD hud;
 
     if (ext_not_supported)
         my_error("No supported file\nI only accept .tsv and .csv files\n");
@@ -103,7 +131,10 @@ void parsor(char *av)
     buffer[int(size)] = '\0';
     data.read(buffer, size);
     data.close();
-    cout << size;
+
     cells = data_checker(buffer, file);
     Comps = data_pusher(buffer, cells);
+    s_sp = specifications_pusher(buffer);
+    hud.init(s_sp, Comps);
+    return hud;
 }

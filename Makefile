@@ -1,25 +1,26 @@
-##
-## EPITECH PROJECT, 2019
-## Makefile
-## File description:
-## Makefile
-##
-
-
 SRC		=	src/main.cpp 					\
 			src/parsor.cpp					\
 			src/my_lib.cpp					\
+			src/window.cpp					\
 
 CLASS	=	src/classes/company.cpp			\
+			src/classes/hud.cpp				\
+			src/classes/specs.cpp			\
+
+CC		=	g++
 
 SFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system -lm
 
+
+
+CFLAGS	=	-I./include -g3
+
+OBJ		=	$(SRC) $(CLASS)
+
 NAME	=	CRG
 
-CFLAGS	=	-I ./include/ -g3
-
 all:
-	g++ $(CFLAGS) -o $(NAME) $(SRC) $(CLASS) $(SFLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(SFLAGS)
 
 clean:
 	echo CLEAN

@@ -22,14 +22,18 @@
 #ifndef MY_LIB
 #define MY_LIB
 
-#include "my_lib.hpp"
 #include "crg/company.hpp"
+#include "crg/specs.hpp"
+#include "crg/hud.hpp"
+
+#include "my_lib.hpp"
 
 #endif
 
 #ifndef CRG
 #define CRG
 
-void parsor(char *av);
+HUD parsor(char *av);
+void displayer(HUD hud);
 
 #endif

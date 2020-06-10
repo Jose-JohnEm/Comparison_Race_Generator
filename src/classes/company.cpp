@@ -2,7 +2,7 @@
 
 company::company()
 {
-    std::cout << "A new Company appear\n";
+    
 }
 
 void company::setName(std::string data)
@@ -25,5 +25,5 @@ void company::setValues(std::vector<std::string> data)
 
 company::~company()
 {
-    std::cout << "The company disappear\n";
+
 }
