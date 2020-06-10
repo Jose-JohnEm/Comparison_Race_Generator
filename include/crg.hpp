@@ -31,6 +31,5 @@
 #define CRG
 
 void parsor(char *av);
-void my_error(std::string msg);
 
 #endif

@@ -8,7 +8,7 @@
 
 SRC		=	src/main.cpp 					\
 			src/parsor.cpp					\
-			src/my_error.cpp				\
+			src/my_lib.cpp					\
 
 CLASS	=	src/classes/company.cpp			\
 

@@ -29,7 +29,7 @@ company data_order(char *line, int cells)
 
 vector<company> data_pusher(char *buff_cp, int cells)
 {
-    char *buff = strdup(buff_cp);
+    char *buff = my_strdup(buff_cp);
     char *pch{nullptr};
     vector<company> Comps;
     string cuter{buff};
@@ -52,7 +52,7 @@ vector<company> data_pusher(char *buff_cp, int cells)
 
 int data_checker(char *buff_cp, string file)
 {
-    char *buff = strdup(buff_cp);
+    char *buff = my_strdup(buff_cp);
     string data{buff};
     char separator;
     int lines{0};
@@ -62,7 +62,7 @@ int data_checker(char *buff_cp, string file)
 
     if ((lines = count(data.begin(), data.end(), '\n')) < 3)
         my_error("Sorry but file format is not correct\n");
-    nb_sep = new int [lines];
+    nb_sep = new int [lines + 1];
     if (tsv_file) separator = '\t';
     else if (csv_file) separator = ',';
 
@@ -99,10 +99,11 @@ void parsor(char *av)
     data.seekg(0, ios::end);
     size = data.tellg();
     data.seekg(0, ios::beg);
-    buffer = new char [size];
+    buffer = new char [int(size) + 1];
+    buffer[int(size)] = '\0';
     data.read(buffer, size);
     data.close();
+    cout << size;
     cells = data_checker(buffer, file);
     Comps = data_pusher(buffer, cells);
-    
 }
